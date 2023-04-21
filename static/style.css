@@ -1,6 +1,98 @@
 .Black {
-    background-color: black;
+    color: black;
 }
+
 .Green {
-    background-color: green;
+    color: rgb(90, 211, 42);
+}
+
+.search-bar {
+    margin-top: 0.3rem!important;
+    display: flex!important;
+}
+.alignment {
+    padding-left: 5.5rem;
+    padding-right: 7rem;
+    margin-right: 1rem!important;
+    margin-left: 0!important;
+}
+a {
+    color: initial;
+    text-decoration: none;
+}
+a:hover{
+    color: initial;
+    text-decoration: underline;
+}
+.navbar-brand:hover, a.artists:hover, .nav-link:hover{
+    text-decoration: none;
+}
+.rm-padding {
+    padding: 0 0.5rem;
+}
+
+.row {
+    align-items: center;
+    margin-bottom: 0.75rem;
+    margin-left: 0.3rem;
+}
+.search-col-1 {
+    width: 5.2%;
+    padding: 0 0.2em;
+}
+
+
+.blank-artist {
+    height: 160px;
+    border-radius: 50%;
+}
+.correct-pfp {
+    width: 160px;
+}
+.artist_name {
+    font-size: 0.912rem;
+}
+.cover_name {
+    font-size: 1.1rem;
+}
+.caption {
+    display: block;
+}
+.search-bar {
+    width: 32vw;
+}
+.playlist-fs {
+    font-size: 0.867rem;
+}
+.profile-button {
+    border: none;
+}
+.profile-btborder {
+    border-bottom: 3px solid black;
+}
+.login-button {
+    background-color: #1DB954;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    font-weight: 100;
+    border: none;
+    border-radius: 10%;
+}
+.login-font {
+    font-size: 1.25rem;
+    justify-content: center;
+}
+@media screen and (max-width: 510px) {
+    div.search-bar {
+        max-width: 60vw;
+        flex-direction: column;
+    }
+    .mx-auto {
+        margin: 0px!important;
+    }
+    
+    input {
+        max-width: 20vw;
+    }
 }

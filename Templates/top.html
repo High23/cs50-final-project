@@ -1,0 +1,57 @@
+{% extends "layout.html" %} 
+
+{% block main %}
+<div class="container-fluid">
+    <form action="/top" method="post">
+        <div class="row" style="flex-wrap: nowrap;">
+            <select name="range" id="range" class="form-select  w-auto">
+                <option value="short_term" selected>Short range</option>
+                <option value="medium_term">Medium range</option>
+                <option value="long_term">Long range</option>
+            </select>
+            <button class="btn btn-primary" type="submit" style="width: 70px;">Find</button>
+        </div>
+    </form>
+    <div class="text-start profile-btborder" style="margin-bottom: 1em;"><strong>Your most listened to artists (based on range, short is default):</strong></div>
+    <div class="row">
+    {% for items in top_artists['items'] %}
+    <div class="col-2" style="margin-bottom: 1em;">
+        <a class="artists" href="{{ items['external_urls']['spotify'] }}">
+        {% if items.images == [] %}
+            <img src="https://i.scdn.co/image/ab6761610000f17837a311796813fd5d38b88f47" class="blank-artist">
+        {% elif items.images[2]['width'] > 160 or items.images[2]['width'] < 160 %}
+            <img src="{{ items.images[1]['url'] }}" class="correct-pfp">
+        {% else %}
+            <img src="{{ items.images[2]['url'] }}">
+        {% endif %}
+            <span class="caption artist_name">{{ items.name }}</span>
+        </a>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="text-start profile-btborder" style="margin-bottom: 1em;"><strong>Your most listened to songs (based on range, short is default):</strong></div>
+    {% for items in top_tracks['items'] %}
+    <div class="row">
+        <div class="col-1 search-col-1 text-start">
+            <a href="{{ items.album['external_urls']['spotify'] }}"><img src="{{ items.album['images'][2]['url'] }}"></a>
+        </div>
+        <div class="col text-start">
+            <div class="cover_name">{{ items.name }}</div>
+            <span class="caption artist_name">
+                {% for artists in items['artists'][0:] %}
+                <a href="{{ artists['external_urls']['spotify'] }}">
+                {{ artists["name"] }}{{"," if not loop.last}}
+                </a>
+                {% endfor %}
+            </span>
+        </div>
+        <div class="col text-start artist_name">
+            <a href="{{ items.album['external_urls']['spotify'] }}">
+                {{ items['album']['name']}}
+            </a>
+        </div>
+        <div class="col">View in <a href="{{ items.album['external_urls']['spotify'] }}"><img src="static\smol_pngs\Spotify_Logo_RGB_Green.png" style="width: 77px;"></a></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

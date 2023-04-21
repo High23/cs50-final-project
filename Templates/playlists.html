@@ -1,0 +1,21 @@
+{% extends "layout.html" %} 
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row">
+{%for items in playlists['items']%}
+        <div class="col" style="margin-bottom: 1em;">
+            <a class="artists" href="{{ items.external_urls['spotify'] }}"><img src="{{ items.images[0]['url'] }}" class="correct-pfp"><div>{{ items.name }}</div></a>
+            <div class="artist_name">Playlist By: <a href="{{ items.owner['external_urls']['spotify'] }}">{{ items.owner['display_name'] }}</a></div>
+            <div class="playlist-fs">
+            {% if items.public %}
+            Public 
+            {% else %}
+            Private
+            {% endif %}
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}

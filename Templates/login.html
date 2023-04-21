@@ -1,0 +1,12 @@
+{% extends "layout.html" %} 
+
+{% block main %}
+<div class="row login-font">
+    <strong >Welcome to Info/Music finder for spotify!</strong> This website contains information regarding your spotify profile such as recently played, followed artists, liked songs, and your top artist/tracks.
+    <p>To access these features you will need to log in and your authorize spotify account.</p> 
+</div>
+    <form action="/login" method="post" >
+        <button type="submit" class="btn login-button">Log In</button>
+    </form>
+
+{% endblock %}

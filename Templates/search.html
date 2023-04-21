@@ -1,0 +1,85 @@
+{% extends "layout.html" %} 
+
+{% block main %}
+<div class="container-fluid">
+    {% if results[0]['type'] == 'track' %}
+        <div class="row alignment">
+            <div class="col-1 text-center rm-padding">Track</div>
+            <div class="col-3 text-end">Album</div>
+            <div class="col text-center rm-padding">Preview</div>
+        </div>
+        {% for items in results %}
+        <div class="row">
+            <div class="col-1 search-col-1 text-start">
+                <a href="{{ items.album['external_urls']['spotify'] }}"><img src="{{ items.album['images'][2]['url'] }}"></a>
+            </div>
+            <div class="col text-start">
+                <div class="cover_name">{{ items.name }}</div>
+                <span class="caption artist_name">
+                    {% for artists in items['artists'][0:] %}
+                    <a href="{{ artists['external_urls']['spotify'] }}">
+                    {{ artists["name"] }}{{"," if not loop.last}}
+                    </a>
+                    {% endfor %}
+                </span>
+            </div>
+            <div class="col text-start artist_name">
+                <a href="{{ items.album['external_urls']['spotify'] }}">{{ items['album']['name']}}</a>
+            </div>
+            <div class="col">
+                <audio controls id="preview">
+                    <source src="{{ items.preview_url }}" type="audio/mpeg" >
+                </audio>
+            </div>
+            <div class="col">Continue listening in <a href="{{ items.album['external_urls']['spotify'] }}"><img src="static\smol_pngs\Spotify_Logo_RGB_Green.png" style="width: 77px;"></a></div>
+        </div>
+        {% endfor %} 
+    {% elif results[0]['type'] == 'artist' %}
+        <div class="row">
+            {% for items in results %}
+                <div class="col-2" style="margin-bottom: 1em;">
+                    <a class="artists" href="{{ items['external_urls']['spotify'] }}">
+                    {% if items.images == [] %}
+                        <img src="https://i.scdn.co/image/ab6761610000f17837a311796813fd5d38b88f47" class="blank-artist">
+                    {% elif items.images[2]['width'] > 160 or items.images[2]['width'] < 160 %}
+                        <img src="{{ items.images[1]['url'] }}" class="correct-pfp">
+                    {% else %}
+                        <img src="{{ items.images[2]['url'] }}">
+                    {% endif %}
+                        <span class="caption artist_name">{{ items.name }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="row">
+        {% for items in results %}
+            <div class="col-sm-2" style="margin-bottom: 1.2rem;">
+                <a class="artists" href="{{items['external_urls']['spotify']}}">
+                    <img src="{{items.images[1]['url']}}" style="height: 230px;">
+                    <span class="cover_name caption">{{ items.name }}</span>
+                </a>
+                <span class="caption artist_name">
+                    {% for artists in items['artists'][0:] %}
+                    <a href="{{ artists['external_urls']['spotify'] }}">
+                    {{ artists["name"] }}{{"," if not loop.last}}
+                    </a>
+                    {% endfor %}
+                </span>
+                <span class="caption">{{ items['release_date'] }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>    
+    <script>
+        for (let i = 0; i < 50; i++){
+            let preview = document.getElementById("preview");
+            preview.volume = 0.12;
+            document.getElementById("preview").id = "preview" + i.toString();
+        } 
+    </script>
+
+    
+
+{% endblock %}

@@ -8,13 +8,13 @@ from dotenv import load_dotenv
 from spoti import user_auth, login_required, search_func
 
 load_dotenv()
-client_id = os.getenv("your spotify client id")
-client_secret = os.getenv("your spotify client secret")
-redirect_uri = os.getenv("your spotify redirect uri")
+client_id = os.getenv("your spotify client id") # Where you would place your spotify client id
+client_secret = os.getenv("your spotify client secret") # Where you would place your spotify client secret
+redirect_uri = os.getenv("your spotify redirect uri") # Where you would place your redirect uri
 authorization = None
 
 app = Flask(__name__)
-app.secret_key = 'Super_Key_Secret%()@$!2'
+app.secret_key = 'Your super secret key'
 
 # Lines 21-32 are credited to and can be found from CS50 2022 week 9 finance, lines 17-20 and 30-36
 # Configure session to use filesystem (instead of signed cookies)

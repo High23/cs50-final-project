@@ -17,7 +17,6 @@ spotipy
 flask
 flask_session 
 dotenv 
-
 # 
 # 
 #
